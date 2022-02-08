@@ -1,0 +1,13 @@
+<div class="container">
+<a href="./Servlet1">click</a>
+
+<button class="btn" (click)="getPhones()">Press me</button>
+
+<ul>
+  <li *ngFor="let a of phonesList">
+    title:{{a.title}}
+    power:{{a.power}}
+    price:{{a.price}}
+  </li>
+</ul>
+</div>
