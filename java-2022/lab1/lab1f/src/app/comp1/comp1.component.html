@@ -1,13 +1,17 @@
 <div class="container">
-<a href="./Servlet1">click</a>
 
+<a href="./Servlet1">click</a>
 <button class="btn" (click)="getPhones()">Press me</button>
 
-<ul>
-  <li *ngFor="let a of phonesList">
-    title:{{a.title}}
-    power:{{a.power}}
-    price:{{a.price}}
+<ul *ngFor="let a of phonesList">
+  <li>
+    Title:{{a.title}}
+  </li>
+  <li>
+    Power:{{a.power}}
+  </li>
+  <li>
+    Price:{{a.price}}
   </li>
 </ul>
 </div>
