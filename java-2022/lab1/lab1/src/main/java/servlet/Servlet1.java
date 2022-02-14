@@ -5,10 +5,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import phones.phones;
-
 import java.io.IOException;
 import java.io.PrintWriter;
+
+import crud.Lab2CrudInterface;
 
 /**
  * Servlet implementation class Servlet1
@@ -16,6 +16,19 @@ import java.io.PrintWriter;
 @WebServlet("/Servlet1")
 public class Servlet1 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
+	ServletConfigInterface servletConfig;
+	Lab2CrudInterface lab2Crud;
+	
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+
+    public Servlet1() {
+        super();
+        this.servletConfig = new ServletConfig();
+        this.lab2Crud = servletConfig.getCrud();
+    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -26,9 +39,21 @@ public class Servlet1 extends HttpServlet {
 		
 		PrintWriter out = response.getWriter();
 		
-		phones phones = new phones("phones1", 80000, 12000f);
+		out.println("["+lab2Crud.readPhones()+"]");
+	}
+
+
+	/**
+	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
+	 */
+	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		String title = request.getParameter("title");
+		int power = Integer.parseInt(request.getParameter("power")) ;
+		float price =  Float.parseFloat(request.getParameter("price"));
 		
-		out.println("["+phones+"]");
+		lab2Crud.updatePhones(new phones(title,power,price))
+		
 	}
 
 }

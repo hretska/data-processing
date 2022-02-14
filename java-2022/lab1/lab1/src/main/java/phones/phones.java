@@ -1,7 +1,15 @@
 package phones;
 
-public class phones {
+import java.io.Serializable;
 
+public class phones implements Serializable {
+
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private String title;
 	private int power;
 	private float price;
