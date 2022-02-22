@@ -9,18 +9,32 @@ public class phones implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+		
+	private int id;
 	private String title;
 	private int power;
 	private float price;
+
 	
-	public phones(String title, int power, float price) {
-		super();
+	public phones() {}
+	
+	public phones(int id, String title, int power, float price) {
+		super();	
+		this.id = id;
 		this.title = title;
 		this.power = power;
 		this.price = price;
+	
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	public String getTitle() {
 		return title;
 	}
@@ -47,7 +61,7 @@ public class phones implements Serializable {
 
 	@Override
 	public String toString() {
-		return "{\"title\": \""+title+"\",\"power\": "+power+", \"price\": "+price+"}";
+		return "{\"id\": "+id+", \"title\": \""+title+"\",\"power\": "+power+", \"price\": "+price+"}";
 	}
 	
 	

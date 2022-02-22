@@ -14,7 +14,8 @@ export class Comp1Component implements OnInit {
   getPhones():void{
     this.service.getPhones().subscribe(
       (phones)=>{
-        this.phonesList=phones
+        this.phonesList=phones;
+        this.service.setList(phones);
       }
     )
   }
