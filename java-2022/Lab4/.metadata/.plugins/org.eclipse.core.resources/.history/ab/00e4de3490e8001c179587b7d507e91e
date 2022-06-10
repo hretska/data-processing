@@ -1,0 +1,67 @@
+package servlets;
+
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
+
+import jakarta.servlet.http.HttpServletRequest;
+import phone.Phone;
+
+public class Helpers {
+	
+	public static JsonElement bodyParse(HttpServletRequest request) {
+		JsonElement jsonElement=null;	
+		
+		try {
+			jsonElement = JsonParser.parseReader(request.getReader());
+		} catch (JsonIOException | JsonSyntaxException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return jsonElement;
+	}
+	
+	public static Phone valutaParse(HttpServletRequest request) {
+		Phone valuta = new Phone();
+		JsonElement jsonElement = bodyParse(request);
+		valuta.setId(jsonElement.getAsJsonObject().get("id").getAsInt());
+		valuta.setValuta(jsonElement.getAsJsonObject().get("valuta").getAsString());
+		valuta.setCount(jsonElement.getAsJsonObject().get("count").getAsDouble());
+		valuta.setCountry(jsonElement.getAsJsonObject().get("country").getAsString());
+		return valuta;
+	}
+	
+	public static int getNextId(List<Phone> list) {
+		int maxId = 0;
+		
+		Iterator<Phone> iterator = list.iterator();
+		while(iterator.hasNext()) {
+			int currentId = iterator.next().getId();
+			if(currentId>maxId) maxId=currentId;
+		}
+		return maxId+1;
+	}
+	
+	public static int getIndexByValutaId(int id,List<Phone> list) {
+		int listId = id;
+		
+		Iterator<Phone> iterator = list.iterator();
+		while(iterator.hasNext()) {
+			Phone temp =iterator.next();
+			if(temp.getId()==listId) { 
+				listId=list.indexOf(temp);
+				break;
+			}
+		}
+		return listId;
+	}
+	
+	
+
+}
